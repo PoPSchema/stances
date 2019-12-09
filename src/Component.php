@@ -33,5 +33,6 @@ class Component extends AbstractComponent
 
         // Initialize classes
         ContainerBuilderUtils::attachFieldResolversFromNamespace(__NAMESPACE__.'\\FieldResolvers');
+        ContainerBuilderUtils::attachTypeResolverPickersFromNamespace(__NAMESPACE__.'\\FieldResolvers');
     }
 }
