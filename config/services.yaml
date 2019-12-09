@@ -1,0 +1,4 @@
+services:
+    PoP\Stances\FieldResolvers\:
+        resource: '../src/FieldResolvers/*'
+        public: true
