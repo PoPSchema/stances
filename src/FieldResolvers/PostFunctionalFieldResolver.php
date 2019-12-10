@@ -33,6 +33,8 @@ class PostFunctionalFieldResolver extends AbstractFunctionalFieldResolver
             'poststances-against-url',
             'createstancebutton-lazy',
             'stances-lazy',
+            'stance-name',
+            'cat-name',
         ];
     }
 
@@ -48,6 +50,8 @@ class PostFunctionalFieldResolver extends AbstractFunctionalFieldResolver
             'poststances-against-url' => SchemaDefinition::TYPE_URL,
             'createstancebutton-lazy' => SchemaDefinition::TYPE_ARRAY,
             'stances-lazy' => SchemaDefinition::TYPE_ARRAY,
+            'stance-name' => SchemaDefinition::TYPE_STRING,
+            'cat-name' => SchemaDefinition::TYPE_STRING,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -65,6 +69,8 @@ class PostFunctionalFieldResolver extends AbstractFunctionalFieldResolver
             'poststances-against-url' => $translationAPI->__('', ''),
             'createstancebutton-lazy' => $translationAPI->__('', ''),
             'stances-lazy' => $translationAPI->__('', ''),
+            'stance-name' => $translationAPI->__('', ''),
+            'cat-name' => $translationAPI->__('', ''),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -86,7 +92,7 @@ class PostFunctionalFieldResolver extends AbstractFunctionalFieldResolver
                 // $input_name = $moduleprocessor_manager->getProcessor($input)->getName($input);
                 $input_name = POP_INPUTNAME_STANCETARGET;
                 return GeneralUtils::addQueryArgs([
-                    $input_name => $typeResolver->getId($post), 
+                    $input_name => $typeResolver->getId($post),
                 ], RouteUtils::getRouteURL($route));
 
             case 'loggedinuser-stances':
@@ -97,7 +103,7 @@ class PostFunctionalFieldResolver extends AbstractFunctionalFieldResolver
                 $query = array(
                     'authors' => [$vars['global-userstate']['current-user-id']],
                 );
-                UserStance_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsStancesaboutpost($query, $typeResolver->getId($post));
+                \UserStance_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsStancesaboutpost($query, $typeResolver->getId($post));
 
                 return $cmspostsapi->getPosts($query, ['return-type' => POP_RETURNTYPE_IDS]);
 
@@ -121,13 +127,22 @@ class PostFunctionalFieldResolver extends AbstractFunctionalFieldResolver
                 );
                 $url = $cmspostsapi->getPermalink($typeResolver->getId($post));
                 return \PoP\ComponentModel\Utils::addRoute($url, $routes[$fieldName]);
-          
+
             // Lazy Loading fields
             case 'createstancebutton-lazy':
                 return null;
 
             case 'stances-lazy':
                 return array();
+
+            case 'stance-name':
+            case 'cat-name':
+                $selected = $typeResolver->resolveValue($resultItem, 'stance', $variables, $expressions, $options);
+                $params = array(
+                    'selected' => $selected
+                );
+                $stance = new \GD_FormInput_Stance($params);
+                return $stance->getSelectedValue();
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);

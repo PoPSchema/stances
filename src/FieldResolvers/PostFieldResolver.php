@@ -1,21 +1,21 @@
 <?php
 namespace PoP\Stances\FieldResolvers;
 
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Posts\TypeResolvers\PostTypeResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
-use PoP\Posts\TypeDataResolvers\ConvertiblePostTypeDataResolver;
+use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoP\Stances\TypeDataResolvers\StanceTypeDataResolver;
-use PoP\Stances\TypeResolvers\StanceTypeResolver;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\Posts\TypeDataResolvers\ConvertiblePostTypeDataResolver;
+use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 
-class StanceFieldResolver extends AbstractDBDataFieldResolver
+class PostFieldResolver extends AbstractDBDataFieldResolver
 {
     public static function getClassesToAttachTo(): array
     {
-        return array(StanceTypeResolver::class);
+        return array(PostTypeResolver::class);
     }
 
     public static function getFieldNamesToResolve(): array
@@ -133,7 +133,7 @@ class StanceFieldResolver extends AbstractDBDataFieldResolver
                     'orderby' => NameResolverFacade::getInstance()->getName('popcms:dbcolumn:orderby:posts:date'),
                     'order' => 'ASC',
                 );
-                UserStance_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsStancesaboutpost($query, $ttypeResolverhis->getId($stance));
+                \UserStance_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsStancesaboutpost($query, $typeResolver->getId($stance));
 
                 return $cmspostsapi->getPosts($query, ['return-type' => POP_RETURNTYPE_IDS]);
 
@@ -151,7 +151,7 @@ class StanceFieldResolver extends AbstractDBDataFieldResolver
                 );
 
                 $query = array();
-                UserStance_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsStancesaboutpost($query, $typeResolver->getId($stance));
+                \UserStance_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsStancesaboutpost($query, $typeResolver->getId($stance));
 
                 // Override the category
                 $query['tax-query'][] = [
