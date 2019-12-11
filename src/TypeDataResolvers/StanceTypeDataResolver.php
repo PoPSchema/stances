@@ -2,7 +2,6 @@
 namespace PoP\Stances\TypeDataResolvers;
 
 use PoP\Posts\TypeDataResolvers\PostTypeDataResolver;
-use PoP\Stances\TypeResolvers\StanceTypeResolver;
 
 class StanceTypeDataResolver extends PostTypeDataResolver
 {
@@ -12,7 +11,7 @@ class StanceTypeDataResolver extends PostTypeDataResolver
         $query['post-types'] = array(POP_USERSTANCE_POSTTYPE_USERSTANCE);
         return $query;
     }
-    
+
     /**
      * Function to override
      */
@@ -23,10 +22,5 @@ class StanceTypeDataResolver extends PostTypeDataResolver
         $query['post-types'] = array(POP_USERSTANCE_POSTTYPE_USERSTANCE);
 
         return $query;
-    }
-
-    public function getTypeResolverClass(): string
-    {
-        return StanceTypeResolver::class;
     }
 }
