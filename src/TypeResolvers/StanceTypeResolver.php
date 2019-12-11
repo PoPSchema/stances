@@ -2,13 +2,13 @@
 namespace PoP\Stances\TypeResolvers;
 
 use PoP\Posts\TypeResolvers\PostTypeResolver;
-use PoP\Stances\TypeDataResolvers\StanceTypeDataResolver;
+use PoP\Stances\TypeDataLoaders\StanceTypeDataLoader;
 
 class StanceTypeResolver extends PostTypeResolver
 {
-    public function getTypeDataResolverClass(): string
+    public function getTypeDataLoaderClass(): string
     {
-        return StanceTypeDataResolver::class;
+        return StanceTypeDataLoader::class;
     }
 }
 

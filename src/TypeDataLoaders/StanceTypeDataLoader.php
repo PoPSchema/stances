@@ -1,9 +1,9 @@
 <?php
-namespace PoP\Stances\TypeDataResolvers;
+namespace PoP\Stances\TypeDataLoaders;
 
-use PoP\Posts\TypeDataResolvers\PostTypeDataResolver;
+use PoP\Posts\TypeDataLoaders\PostTypeDataLoader;
 
-class StanceTypeDataResolver extends PostTypeDataResolver
+class StanceTypeDataLoader extends PostTypeDataLoader
 {
     public function getDataFromIdsQuery(array $ids): array
     {
