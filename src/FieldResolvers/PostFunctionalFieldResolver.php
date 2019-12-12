@@ -48,8 +48,8 @@ class PostFunctionalFieldResolver extends AbstractFunctionalFieldResolver
             'poststances-pro-url' => SchemaDefinition::TYPE_URL,
             'poststances-neutral-url' => SchemaDefinition::TYPE_URL,
             'poststances-against-url' => SchemaDefinition::TYPE_URL,
-            'createstancebutton-lazy' => SchemaDefinition::TYPE_ARRAY,
-            'stances-lazy' => SchemaDefinition::TYPE_ARRAY,
+            'createstancebutton-lazy' => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_ID),
+            'stances-lazy' => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_ID),
             'stance-name' => SchemaDefinition::TYPE_STRING,
             'cat-name' => SchemaDefinition::TYPE_STRING,
         ];
