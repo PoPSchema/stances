@@ -40,15 +40,15 @@ class PostFieldResolver extends AbstractDBDataFieldResolver
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $types = [
-            'cats' => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_ID),
-            'cat-slugs' => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_STRING),
+            'cats' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
+            'cat-slugs' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
             'stance' => SchemaDefinition::TYPE_INT,
             'title' => SchemaDefinition::TYPE_STRING,
             'excerpt' => SchemaDefinition::TYPE_STRING,
             'content' => SchemaDefinition::TYPE_STRING,
             'stancetarget' => SchemaDefinition::TYPE_ID,
             'has-stancetarget' => SchemaDefinition::TYPE_BOOL,
-            'stances' => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_ID),
+            'stances' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
             'has-stances' => SchemaDefinition::TYPE_BOOL,
             'stance-pro-count' => SchemaDefinition::TYPE_INT,
             'stance-neutral-count' => SchemaDefinition::TYPE_INT,

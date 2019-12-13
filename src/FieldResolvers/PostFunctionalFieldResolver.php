@@ -42,14 +42,14 @@ class PostFunctionalFieldResolver extends AbstractFunctionalFieldResolver
     {
         $types = [
             'addstance-url' => SchemaDefinition::TYPE_URL,
-            'loggedinuser-stances' => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_INT),
+            'loggedinuser-stances' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_INT),
             'has-loggedinuser-stances' => SchemaDefinition::TYPE_BOOL,
             'editstance-url' => SchemaDefinition::TYPE_URL,
             'poststances-pro-url' => SchemaDefinition::TYPE_URL,
             'poststances-neutral-url' => SchemaDefinition::TYPE_URL,
             'poststances-against-url' => SchemaDefinition::TYPE_URL,
-            'createstancebutton-lazy' => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_ID),
-            'stances-lazy' => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_ID),
+            'createstancebutton-lazy' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
+            'stances-lazy' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
             'stance-name' => SchemaDefinition::TYPE_STRING,
             'cat-name' => SchemaDefinition::TYPE_STRING,
         ];
