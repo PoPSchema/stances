@@ -14,11 +14,6 @@ class StanceTypeResolverPicker extends AbstractTypeResolverPicker
         ];
     }
 
-    public function getSchemaDefinitionObjectNature(): string
-    {
-        return 'is-userstance';
-    }
-
     public function getTypeResolverClass(): string
     {
         return StanceTypeResolver::class;
