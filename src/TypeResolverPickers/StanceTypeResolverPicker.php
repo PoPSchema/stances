@@ -2,7 +2,7 @@
 namespace PoP\Stances\TypeResolverPickers;
 
 use PoP\ComponentModel\TypeResolverPickers\AbstractTypeResolverPicker;
-use PoP\Posts\TypeResolvers\PostConvertibleTypeResolver;
+use PoP\Posts\TypeResolvers\PostUnionTypeResolver;
 use PoP\Stances\TypeResolvers\StanceTypeResolver;
 
 class StanceTypeResolverPicker extends AbstractTypeResolverPicker
@@ -10,7 +10,7 @@ class StanceTypeResolverPicker extends AbstractTypeResolverPicker
     public static function getClassesToAttachTo(): array
     {
         return [
-            PostConvertibleTypeResolver::class,
+            PostUnionTypeResolver::class,
         ];
     }
 
