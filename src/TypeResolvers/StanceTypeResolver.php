@@ -1,11 +1,32 @@
 <?php
 namespace PoP\Stances\TypeResolvers;
 
-use PoP\Posts\TypeResolvers\PostTypeResolver;
+use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Stances\TypeDataLoaders\StanceTypeDataLoader;
+use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
 
-class StanceTypeResolver extends PostTypeResolver
+class StanceTypeResolver extends AbstractTypeResolver
 {
+	public const NAME = 'Stance';
+
+    public function getTypeName(): string
+    {
+        return self::NAME;
+    }
+
+    public function getSchemaTypeDescription(): ?string
+    {
+        $translationAPI = TranslationAPIFacade::getInstance();
+        return $translationAPI->__('A stance by the user (from among “positive”, “neutral” or “negative”) and why', 'stances');
+    }
+
+    public function getId($resultItem)
+    {
+        $cmspostsresolver = \PoP\Posts\ObjectPropertyResolverFactory::getInstance();
+        $post = $resultItem;
+        return $cmspostsresolver->getPostId($post);
+    }
+
     public function getTypeDataLoaderClass(): string
     {
         return StanceTypeDataLoader::class;
