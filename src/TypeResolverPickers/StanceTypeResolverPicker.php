@@ -20,9 +20,15 @@ class StanceTypeResolverPicker extends AbstractTypeResolverPicker
         return StanceTypeResolver::class;
     }
 
-    public function process($resultItemOrID): bool
+    public function isInstanceOfType($object): bool
     {
         $stanceTypeAPI = StanceTypeAPIFacade::getInstance();
-        return $stanceTypeAPI->isInstanceOfStanceType($resultItemOrID);
+        return $stanceTypeAPI->isInstanceOfStanceType($object);
+    }
+
+    public function isIDOfType($resultItemID): bool
+    {
+        $stanceTypeAPI = StanceTypeAPIFacade::getInstance();
+        return $stanceTypeAPI->stanceExists($resultItemID);
     }
 }
