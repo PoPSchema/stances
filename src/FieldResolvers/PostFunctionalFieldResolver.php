@@ -11,6 +11,7 @@ use PoP\ComponentModel\GeneralUtils;
 use PoP\Engine\Route\RouteUtils;
 use PoP\Posts\TypeResolvers\PostTypeResolver;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
+use PoP\Posts\Facades\PostTypeAPIFacade;
 
 class PostFunctionalFieldResolver extends AbstractFunctionalFieldResolver
 {
@@ -78,7 +79,7 @@ class PostFunctionalFieldResolver extends AbstractFunctionalFieldResolver
     public function resolveValue(TypeResolverInterface $typeResolver, $resultItem, string $fieldName, array $fieldArgs = [], ?array $variables = null, ?array $expressions = null, array $options = [])
     {
         $post = $resultItem;
-        $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+        $cmspostsapi = PostTypeAPIFacade::getInstance();
         $cmseditpostsapi = \PoP\EditPosts\FunctionAPIFactory::getInstance();
         switch ($fieldName) {
             case 'addstance-url':
