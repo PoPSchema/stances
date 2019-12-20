@@ -81,7 +81,7 @@ class PostFieldResolver extends AbstractDBDataFieldResolver
 
     public function resolveValue(TypeResolverInterface $typeResolver, $resultItem, string $fieldName, array $fieldArgs = [], ?array $variables = null, ?array $expressions = null, array $options = [])
     {
-        $cmspostsapi = PostTypeAPIFacade::getInstance();
+        $postTypeAPI = PostTypeAPIFacade::getInstance();
         $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
         $stance = $resultItem;
         switch ($fieldName) {
@@ -113,7 +113,7 @@ class PostFieldResolver extends AbstractDBDataFieldResolver
             case 'excerpt':
             case 'content':
                 // Add the quotes around the content for the Stance
-                $value = $cmspostsapi->getBasicPostContent($stance);
+                $value = $postTypeAPI->getBasicPostContent($stance);
                 if ($fieldName == 'title') {
                     return limitString($value, 100);
                 } elseif ($fieldName == 'excerpt') {
@@ -136,7 +136,7 @@ class PostFieldResolver extends AbstractDBDataFieldResolver
                 );
                 \UserStance_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsStancesaboutpost($query, $typeResolver->getId($stance));
 
-                return $cmspostsapi->getPosts($query, ['return-type' => POP_RETURNTYPE_IDS]);
+                return $postTypeAPI->getPosts($query, ['return-type' => POP_RETURNTYPE_IDS]);
 
             case 'has-stances':
                 $referencedby = $typeResolver->resolveValue($resultItem, 'stances', $variables, $expressions, $options);
@@ -163,7 +163,7 @@ class PostFieldResolver extends AbstractDBDataFieldResolver
                 // // All results
                 // $query['limit'] = 0;
 
-                return $cmspostsapi->getPostCount($query);
+                return $postTypeAPI->getPostCount($query);
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);

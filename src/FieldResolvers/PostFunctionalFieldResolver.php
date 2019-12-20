@@ -79,7 +79,7 @@ class PostFunctionalFieldResolver extends AbstractFunctionalFieldResolver
     public function resolveValue(TypeResolverInterface $typeResolver, $resultItem, string $fieldName, array $fieldArgs = [], ?array $variables = null, ?array $expressions = null, array $options = [])
     {
         $post = $resultItem;
-        $cmspostsapi = PostTypeAPIFacade::getInstance();
+        $postTypeAPI = PostTypeAPIFacade::getInstance();
         $cmseditpostsapi = \PoP\EditPosts\FunctionAPIFactory::getInstance();
         switch ($fieldName) {
             case 'addstance-url':
@@ -106,7 +106,7 @@ class PostFunctionalFieldResolver extends AbstractFunctionalFieldResolver
                 );
                 \UserStance_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsStancesaboutpost($query, $typeResolver->getId($post));
 
-                return $cmspostsapi->getPosts($query, ['return-type' => POP_RETURNTYPE_IDS]);
+                return $postTypeAPI->getPosts($query, ['return-type' => POP_RETURNTYPE_IDS]);
 
             case 'has-loggedinuser-stances':
                 $referencedby = $typeResolver->resolveValue($resultItem, 'loggedinuser-stances', $variables, $expressions, $options);
@@ -126,7 +126,7 @@ class PostFunctionalFieldResolver extends AbstractFunctionalFieldResolver
                     'poststances-neutral-url' => POP_USERSTANCE_ROUTE_STANCES_NEUTRAL,
                     'poststances-against-url' => POP_USERSTANCE_ROUTE_STANCES_AGAINST,
                 );
-                $url = $cmspostsapi->getPermalink($typeResolver->getId($post));
+                $url = $postTypeAPI->getPermalink($typeResolver->getId($post));
                 return \PoP\ComponentModel\Utils::addRoute($url, $routes[$fieldName]);
 
             // Lazy Loading fields
