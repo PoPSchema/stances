@@ -7,6 +7,13 @@ namespace PoP\Stances\TypeAPIs;
 interface StanceTypeAPIInterface
 {
     /**
+     * Return the stance's ID
+     *
+     * @param [type] $stance
+     * @return void
+     */
+    public function getID($stance);
+    /**
      * Indicates if the passed object is of type Stance
      *
      * @param [type] $object

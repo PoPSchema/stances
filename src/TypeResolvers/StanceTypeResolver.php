@@ -1,6 +1,7 @@
 <?php
 namespace PoP\Stances\TypeResolvers;
 
+use PoP\Stances\Facades\StanceTypeAPIFacade;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Stances\TypeDataLoaders\StanceTypeDataLoader;
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
@@ -22,9 +23,8 @@ class StanceTypeResolver extends AbstractTypeResolver
 
     public function getId($resultItem)
     {
-        $cmspostsresolver = \PoP\Posts\ObjectPropertyResolverFactory::getInstance();
-        $post = $resultItem;
-        return $cmspostsresolver->getPostId($post);
+        $stanceTypeAPI = StanceTypeAPIFacade::getInstance();
+        return $stanceTypeAPI->getID($resultItem);
     }
 
     public function getTypeDataLoaderClass(): string
