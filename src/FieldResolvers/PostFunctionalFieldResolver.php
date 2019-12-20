@@ -126,7 +126,7 @@ class PostFunctionalFieldResolver extends AbstractFunctionalFieldResolver
                     'poststances-neutral-url' => POP_USERSTANCE_ROUTE_STANCES_NEUTRAL,
                     'poststances-against-url' => POP_USERSTANCE_ROUTE_STANCES_AGAINST,
                 );
-                $url = $postTypeAPI->getPermalink($typeResolver->getId($post));
+                $url = $postTypeAPI->getPermalink($post);
                 return \PoP\ComponentModel\Utils::addRoute($url, $routes[$fieldName]);
 
             // Lazy Loading fields
