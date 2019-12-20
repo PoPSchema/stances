@@ -93,7 +93,7 @@ class PostFunctionalFieldResolver extends AbstractFunctionalFieldResolver
                 // $input_name = $moduleprocessor_manager->getProcessor($input)->getName($input);
                 $input_name = POP_INPUTNAME_STANCETARGET;
                 return GeneralUtils::addQueryArgs([
-                    $input_name => $typeResolver->getId($post),
+                    $input_name => $typeResolver->getID($post),
                 ], RouteUtils::getRouteURL($route));
 
             case 'loggedinuser-stances':
@@ -104,7 +104,7 @@ class PostFunctionalFieldResolver extends AbstractFunctionalFieldResolver
                 $query = array(
                     'authors' => [$vars['global-userstate']['current-user-id']],
                 );
-                \UserStance_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsStancesaboutpost($query, $typeResolver->getId($post));
+                \UserStance_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsStancesaboutpost($query, $typeResolver->getID($post));
 
                 return $postTypeAPI->getPosts($query, ['return-type' => POP_RETURNTYPE_IDS]);
 

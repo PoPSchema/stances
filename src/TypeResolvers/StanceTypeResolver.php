@@ -21,7 +21,7 @@ class StanceTypeResolver extends AbstractTypeResolver
         return $translationAPI->__('A stance by the user (from among “positive”, “neutral” or “negative”) and why', 'stances');
     }
 
-    public function getId($resultItem)
+    public function getID($resultItem)
     {
         $stanceTypeAPI = StanceTypeAPIFacade::getInstance();
         return $stanceTypeAPI->getID($resultItem);

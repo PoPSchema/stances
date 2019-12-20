@@ -87,7 +87,7 @@ class PostFieldResolver extends AbstractDBDataFieldResolver
         switch ($fieldName) {
             case 'cats':
                 return $taxonomyapi->getPostTaxonomyTerms(
-                    $typeResolver->getId($stance),
+                    $typeResolver->getID($stance),
                     POP_USERSTANCE_TAXONOMY_STANCE,
                     [
                         'return-type' => POP_RETURNTYPE_IDS,
@@ -96,7 +96,7 @@ class PostFieldResolver extends AbstractDBDataFieldResolver
 
             case 'cat-slugs':
                 return $taxonomyapi->getPostTaxonomyTerms(
-                    $typeResolver->getId($stance),
+                    $typeResolver->getID($stance),
                     POP_USERSTANCE_TAXONOMY_STANCE,
                     [
                         'return-type' => POP_RETURNTYPE_SLUGS,
@@ -122,7 +122,7 @@ class PostFieldResolver extends AbstractDBDataFieldResolver
                 return $value;
 
             case 'stancetarget':
-                return \PoP\PostMeta\Utils::getPostMeta($typeResolver->getId($stance), GD_METAKEY_POST_STANCETARGET, true);
+                return \PoP\PostMeta\Utils::getPostMeta($typeResolver->getID($stance), GD_METAKEY_POST_STANCETARGET, true);
 
             case 'has-stancetarget':
                 // Cannot use !is_null because getPostMeta returns "" when there's no entry, instead of null
@@ -134,7 +134,7 @@ class PostFieldResolver extends AbstractDBDataFieldResolver
                     'orderby' => NameResolverFacade::getInstance()->getName('popcms:dbcolumn:orderby:posts:date'),
                     'order' => 'ASC',
                 );
-                \UserStance_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsStancesaboutpost($query, $typeResolver->getId($stance));
+                \UserStance_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsStancesaboutpost($query, $typeResolver->getID($stance));
 
                 return $postTypeAPI->getPosts($query, ['return-type' => POP_RETURNTYPE_IDS]);
 
@@ -152,7 +152,7 @@ class PostFieldResolver extends AbstractDBDataFieldResolver
                 );
 
                 $query = array();
-                \UserStance_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsStancesaboutpost($query, $typeResolver->getId($stance));
+                \UserStance_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsStancesaboutpost($query, $typeResolver->getID($stance));
 
                 // Override the category
                 $query['tax-query'][] = [
