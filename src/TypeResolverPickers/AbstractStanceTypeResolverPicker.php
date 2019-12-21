@@ -3,18 +3,10 @@ namespace PoP\Stances\TypeResolverPickers;
 
 use PoP\Stances\Facades\StanceTypeAPIFacade;
 use PoP\Stances\TypeResolvers\StanceTypeResolver;
-use PoP\Content\TypeResolvers\ContentEntityUnionTypeResolver;
 use PoP\ComponentModel\TypeResolverPickers\AbstractTypeResolverPicker;
 
-class StanceTypeResolverPicker extends AbstractTypeResolverPicker
+class AbstractStanceTypeResolverPicker extends AbstractTypeResolverPicker
 {
-    public static function getClassesToAttachTo(): array
-    {
-        return [
-            ContentEntityUnionTypeResolver::class,
-        ];
-    }
-
     public function getTypeResolverClass(): string
     {
         return StanceTypeResolver::class;

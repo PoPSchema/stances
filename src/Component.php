@@ -1,9 +1,12 @@
 <?php
 namespace PoP\Stances;
 
+use PoP\Stances\Environment;
 use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Component\YAMLServicesTrait;
 use PoP\ComponentModel\Container\ContainerBuilderUtils;
+use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
+use PoP\Stances\TypeResolverPickers\Optional\StanceContentEntityTypeResolverPicker;
 
 /**
  * Initialize component
@@ -33,6 +36,18 @@ class Component extends AbstractComponent
 
         // Initialize classes
         ContainerBuilderUtils::attachFieldResolversFromNamespace(__NAMESPACE__.'\\FieldResolvers');
-        ContainerBuilderUtils::attachTypeResolverPickersFromNamespace(__NAMESPACE__.'\\TypeResolverPickers');
+        self::attachTypeResolverPickers();
+    }
+
+    /**
+     * If enabled, load the TypeResolverPickers
+     *
+     * @return void
+     */
+    protected static function attachTypeResolverPickers()
+    {
+        if (Environment::addStanceTypeToContentEntityUnionTypes()) {
+            StanceContentEntityTypeResolverPicker::attach(AttachableExtensionGroups::TYPERESOLVERPICKERS);
+        }
     }
 }
