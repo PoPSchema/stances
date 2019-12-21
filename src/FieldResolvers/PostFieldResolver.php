@@ -1,16 +1,17 @@
 <?php
 namespace PoP\Stances\FieldResolvers;
 
+use PoP\Posts\Facades\PostTypeAPIFacade;
 use PoP\Posts\TypeResolvers\PostTypeResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
+use PoP\Stances\TypeResolvers\StanceTypeResolver;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
-use PoP\Stances\TypeResolvers\StanceTypeResolver;
+use PoP\ComponentModel\TypeResolvers\UnionTypeHelpers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Content\TypeResolvers\ContentEntityUnionTypeResolver;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
-use PoP\Posts\Facades\PostTypeAPIFacade;
 
 class PostFieldResolver extends AbstractDBDataFieldResolver
 {
@@ -173,7 +174,7 @@ class PostFieldResolver extends AbstractDBDataFieldResolver
     {
         switch ($fieldName) {
             case 'stancetarget':
-                return ContentEntityUnionTypeResolver::class;
+                return UnionTypeHelpers::getUnionOrTargetTypeResolverClass(ContentEntityUnionTypeResolver::class);
 
             case 'stances':
                 return StanceTypeResolver::class;
