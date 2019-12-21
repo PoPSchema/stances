@@ -8,7 +8,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoP\Stances\TypeResolvers\StanceTypeResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\Posts\TypeResolvers\ContentEntityUnionTypeResolver;
+use PoP\Content\TypeResolvers\ContentEntityUnionTypeResolver;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\Posts\Facades\PostTypeAPIFacade;
 
