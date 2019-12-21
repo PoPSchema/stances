@@ -8,7 +8,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoP\Stances\TypeResolvers\StanceTypeResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\Posts\TypeResolvers\PostUnionTypeResolver;
+use PoP\Posts\TypeResolvers\ContentEntityUnionTypeResolver;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\Posts\Facades\PostTypeAPIFacade;
 
@@ -173,7 +173,7 @@ class PostFieldResolver extends AbstractDBDataFieldResolver
     {
         switch ($fieldName) {
             case 'stancetarget':
-                return PostUnionTypeResolver::class;
+                return ContentEntityUnionTypeResolver::class;
 
             case 'stances':
                 return StanceTypeResolver::class;

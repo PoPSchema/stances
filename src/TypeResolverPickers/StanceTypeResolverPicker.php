@@ -3,7 +3,7 @@ namespace PoP\Stances\TypeResolverPickers;
 
 use PoP\Stances\Facades\StanceTypeAPIFacade;
 use PoP\Stances\TypeResolvers\StanceTypeResolver;
-use PoP\Posts\TypeResolvers\PostUnionTypeResolver;
+use PoP\Posts\TypeResolvers\ContentEntityUnionTypeResolver;
 use PoP\ComponentModel\TypeResolverPickers\AbstractTypeResolverPicker;
 
 class StanceTypeResolverPicker extends AbstractTypeResolverPicker
@@ -11,7 +11,7 @@ class StanceTypeResolverPicker extends AbstractTypeResolverPicker
     public static function getClassesToAttachTo(): array
     {
         return [
-            PostUnionTypeResolver::class,
+            ContentEntityUnionTypeResolver::class,
         ];
     }
 
