@@ -1,12 +1,10 @@
 <?php
 namespace PoP\Stances\FieldResolvers;
 
-use PoP\ComponentModel\Utils;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\AbstractFunctionalFieldResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\GeneralUtils;
 use PoP\Engine\Route\RouteUtils;
 use PoP\Posts\TypeResolvers\PostTypeResolver;
