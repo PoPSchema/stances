@@ -26,18 +26,18 @@ class PostFieldResolver extends AbstractDBDataFieldResolver
     {
         return [
             'cats',
-            'cat-slugs',
+            'catSlugs',
             'stance',
             'title',
             'excerpt',
             'content',
             'stancetarget',
-            'has-stancetarget',
+            'hasStanceTarget',
             'stances',
-            'has-stances',
-            'stance-pro-count',
-            'stance-neutral-count',
-            'stance-against-count',
+            'hasStances',
+            'stanceProCount',
+            'stanceNeutralCount',
+            'stanceAgainstCount',
         ];
     }
 
@@ -45,18 +45,18 @@ class PostFieldResolver extends AbstractDBDataFieldResolver
     {
         $types = [
             'cats' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
-            'cat-slugs' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
+            'catSlugs' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
             'stance' => SchemaDefinition::TYPE_INT,
             'title' => SchemaDefinition::TYPE_STRING,
             'excerpt' => SchemaDefinition::TYPE_STRING,
             'content' => SchemaDefinition::TYPE_STRING,
             'stancetarget' => SchemaDefinition::TYPE_ID,
-            'has-stancetarget' => SchemaDefinition::TYPE_BOOL,
+            'hasStanceTarget' => SchemaDefinition::TYPE_BOOL,
             'stances' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
-            'has-stances' => SchemaDefinition::TYPE_BOOL,
-            'stance-pro-count' => SchemaDefinition::TYPE_INT,
-            'stance-neutral-count' => SchemaDefinition::TYPE_INT,
-            'stance-against-count' => SchemaDefinition::TYPE_INT,
+            'hasStances' => SchemaDefinition::TYPE_BOOL,
+            'stanceProCount' => SchemaDefinition::TYPE_INT,
+            'stanceNeutralCount' => SchemaDefinition::TYPE_INT,
+            'stanceAgainstCount' => SchemaDefinition::TYPE_INT,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -66,18 +66,18 @@ class PostFieldResolver extends AbstractDBDataFieldResolver
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
             'cats' => $translationAPI->__('', ''),
-            'cat-slugs' => $translationAPI->__('', ''),
+            'catSlugs' => $translationAPI->__('', ''),
             'stance' => $translationAPI->__('', ''),
             'title' => $translationAPI->__('', ''),
             'excerpt' => $translationAPI->__('', ''),
             'content' => $translationAPI->__('', ''),
             'stancetarget' => $translationAPI->__('', ''),
-            'has-stancetarget' => $translationAPI->__('', ''),
+            'hasStanceTarget' => $translationAPI->__('', ''),
             'stances' => $translationAPI->__('', ''),
-            'has-stances' => $translationAPI->__('', ''),
-            'stance-pro-count' => $translationAPI->__('', ''),
-            'stance-neutral-count' => $translationAPI->__('', ''),
-            'stance-against-count' => $translationAPI->__('', ''),
+            'hasStances' => $translationAPI->__('', ''),
+            'stanceProCount' => $translationAPI->__('', ''),
+            'stanceNeutralCount' => $translationAPI->__('', ''),
+            'stanceAgainstCount' => $translationAPI->__('', ''),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -97,7 +97,7 @@ class PostFieldResolver extends AbstractDBDataFieldResolver
                     ]
                 );
 
-            case 'cat-slugs':
+            case 'catSlugs':
                 return $taxonomyapi->getPostTaxonomyTerms(
                     $typeResolver->getID($stance),
                     POP_USERSTANCE_TAXONOMY_STANCE,
@@ -127,7 +127,7 @@ class PostFieldResolver extends AbstractDBDataFieldResolver
             case 'stancetarget':
                 return \PoP\PostMeta\Utils::getPostMeta($typeResolver->getID($stance), GD_METAKEY_POST_STANCETARGET, true);
 
-            case 'has-stancetarget':
+            case 'hasStanceTarget':
                 // Cannot use !is_null because getPostMeta returns "" when there's no entry, instead of null
                 return $typeResolver->resolveValue($resultItem, 'stancetarget', $variables, $expressions, $options);
 
@@ -141,17 +141,17 @@ class PostFieldResolver extends AbstractDBDataFieldResolver
 
                 return $postTypeAPI->getPosts($query, ['return-type' => POP_RETURNTYPE_IDS]);
 
-            case 'has-stances':
+            case 'hasStances':
                 $referencedby = $typeResolver->resolveValue($resultItem, 'stances', $variables, $expressions, $options);
                 return !empty($referencedby);
 
-            case 'stance-pro-count':
-            case 'stance-neutral-count':
-            case 'stance-against-count':
+            case 'stanceProCount':
+            case 'stanceNeutralCount':
+            case 'stanceAgainstCount':
                 $cats = array(
-                    'stance-pro-count' => POP_USERSTANCE_TERM_STANCE_PRO,
-                    'stance-neutral-count' => POP_USERSTANCE_TERM_STANCE_NEUTRAL,
-                    'stance-against-count' => POP_USERSTANCE_TERM_STANCE_AGAINST,
+                    'stanceProCount' => POP_USERSTANCE_TERM_STANCE_PRO,
+                    'stanceNeutralCount' => POP_USERSTANCE_TERM_STANCE_NEUTRAL,
+                    'stanceAgainstCount' => POP_USERSTANCE_TERM_STANCE_AGAINST,
                 );
 
                 $query = array();

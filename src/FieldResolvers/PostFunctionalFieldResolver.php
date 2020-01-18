@@ -23,34 +23,34 @@ class PostFunctionalFieldResolver extends AbstractFunctionalFieldResolver
     public static function getFieldNamesToResolve(): array
     {
         return [
-            'addstance-url',
-            'loggedinuser-stances',
-            'has-loggedinuser-stances',
-            'editstance-url',
-            'poststances-pro-url',
-            'poststances-neutral-url',
-            'poststances-against-url',
-            'createstancebutton-lazy',
-            'stances-lazy',
-            'stance-name',
-            'cat-name',
+            'addStanceURL',
+            'loggedInUserStances',
+            'hasLoggedInUserStances',
+            'editStanceURL',
+            'postStancesProURL',
+            'postStancesNeutralURL',
+            'postStancesAgainstURL',
+            'createStanceButtonLazy',
+            'stancesLazy',
+            'stanceName',
+            'catName',
         ];
     }
 
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $types = [
-            'addstance-url' => SchemaDefinition::TYPE_URL,
-            'loggedinuser-stances' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_INT),
-            'has-loggedinuser-stances' => SchemaDefinition::TYPE_BOOL,
-            'editstance-url' => SchemaDefinition::TYPE_URL,
-            'poststances-pro-url' => SchemaDefinition::TYPE_URL,
-            'poststances-neutral-url' => SchemaDefinition::TYPE_URL,
-            'poststances-against-url' => SchemaDefinition::TYPE_URL,
-            'createstancebutton-lazy' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
-            'stances-lazy' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
-            'stance-name' => SchemaDefinition::TYPE_STRING,
-            'cat-name' => SchemaDefinition::TYPE_STRING,
+            'addStanceURL' => SchemaDefinition::TYPE_URL,
+            'loggedInUserStances' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_INT),
+            'hasLoggedInUserStances' => SchemaDefinition::TYPE_BOOL,
+            'editStanceURL' => SchemaDefinition::TYPE_URL,
+            'postStancesProURL' => SchemaDefinition::TYPE_URL,
+            'postStancesNeutralURL' => SchemaDefinition::TYPE_URL,
+            'postStancesAgainstURL' => SchemaDefinition::TYPE_URL,
+            'createStanceButtonLazy' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
+            'stancesLazy' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
+            'stanceName' => SchemaDefinition::TYPE_STRING,
+            'catName' => SchemaDefinition::TYPE_STRING,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -59,17 +59,17 @@ class PostFunctionalFieldResolver extends AbstractFunctionalFieldResolver
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'addstance-url' => $translationAPI->__('', ''),
-            'loggedinuser-stances' => $translationAPI->__('', ''),
-            'has-loggedinuser-stances' => $translationAPI->__('', ''),
-            'editstance-url' => $translationAPI->__('', ''),
-            'poststances-pro-url' => $translationAPI->__('', ''),
-            'poststances-neutral-url' => $translationAPI->__('', ''),
-            'poststances-against-url' => $translationAPI->__('', ''),
-            'createstancebutton-lazy' => $translationAPI->__('', ''),
-            'stances-lazy' => $translationAPI->__('', ''),
-            'stance-name' => $translationAPI->__('', ''),
-            'cat-name' => $translationAPI->__('', ''),
+            'addStanceURL' => $translationAPI->__('', ''),
+            'loggedInUserStances' => $translationAPI->__('', ''),
+            'hasLoggedInUserStances' => $translationAPI->__('', ''),
+            'editStanceURL' => $translationAPI->__('', ''),
+            'postStancesProURL' => $translationAPI->__('', ''),
+            'postStancesNeutralURL' => $translationAPI->__('', ''),
+            'postStancesAgainstURL' => $translationAPI->__('', ''),
+            'createStanceButtonLazy' => $translationAPI->__('', ''),
+            'stancesLazy' => $translationAPI->__('', ''),
+            'stanceName' => $translationAPI->__('', ''),
+            'catName' => $translationAPI->__('', ''),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -80,9 +80,9 @@ class PostFunctionalFieldResolver extends AbstractFunctionalFieldResolver
         $postTypeAPI = PostTypeAPIFacade::getInstance();
         $cmseditpostsapi = \PoP\EditPosts\FunctionAPIFactory::getInstance();
         switch ($fieldName) {
-            case 'addstance-url':
+            case 'addStanceURL':
                 $routes = array(
-                    'addstance-url' => POP_USERSTANCE_ROUTE_ADDSTANCE,
+                    'addStanceURL' => POP_USERSTANCE_ROUTE_ADDSTANCE,
                 );
                 $route = $routes[$fieldName];
 
@@ -94,7 +94,7 @@ class PostFunctionalFieldResolver extends AbstractFunctionalFieldResolver
                     $input_name => $typeResolver->getID($post),
                 ], RouteUtils::getRouteURL($route));
 
-            case 'loggedinuser-stances':
+            case 'loggedInUserStances':
                 $vars = \PoP\ComponentModel\Engine_Vars::getVars();
                 if (!$vars['global-userstate']['is-user-logged-in']) {
                     return array();
@@ -106,36 +106,36 @@ class PostFunctionalFieldResolver extends AbstractFunctionalFieldResolver
 
                 return $postTypeAPI->getPosts($query, ['return-type' => POP_RETURNTYPE_IDS]);
 
-            case 'has-loggedinuser-stances':
-                $referencedby = $typeResolver->resolveValue($resultItem, 'loggedinuser-stances', $variables, $expressions, $options);
+            case 'hasLoggedInUserStances':
+                $referencedby = $typeResolver->resolveValue($resultItem, 'loggedInUserStances', $variables, $expressions, $options);
                 return !empty($referencedby);
 
-            case 'editstance-url':
-                if ($referencedby = $typeResolver->resolveValue($resultItem, 'loggedinuser-stances', $variables, $expressions, $options)) {
+            case 'editStanceURL':
+                if ($referencedby = $typeResolver->resolveValue($resultItem, 'loggedInUserStances', $variables, $expressions, $options)) {
                     return urldecode($cmseditpostsapi->getEditPostLink($referencedby[0]));
                 }
                 return null;
 
-            case 'poststances-pro-url':
-            case 'poststances-neutral-url':
-            case 'poststances-against-url':
+            case 'postStancesProURL':
+            case 'postStancesNeutralURL':
+            case 'postStancesAgainstURL':
                 $routes = array(
-                    'poststances-pro-url' => POP_USERSTANCE_ROUTE_STANCES_PRO,
-                    'poststances-neutral-url' => POP_USERSTANCE_ROUTE_STANCES_NEUTRAL,
-                    'poststances-against-url' => POP_USERSTANCE_ROUTE_STANCES_AGAINST,
+                    'postStancesProURL' => POP_USERSTANCE_ROUTE_STANCES_PRO,
+                    'postStancesNeutralURL' => POP_USERSTANCE_ROUTE_STANCES_NEUTRAL,
+                    'postStancesAgainstURL' => POP_USERSTANCE_ROUTE_STANCES_AGAINST,
                 );
                 $url = $postTypeAPI->getPermalink($post);
                 return \PoP\ComponentModel\Utils::addRoute($url, $routes[$fieldName]);
 
             // Lazy Loading fields
-            case 'createstancebutton-lazy':
+            case 'createStanceButtonLazy':
                 return null;
 
-            case 'stances-lazy':
+            case 'stancesLazy':
                 return array();
 
-            case 'stance-name':
-            case 'cat-name':
+            case 'stanceName':
+            case 'catName':
                 $selected = $typeResolver->resolveValue($resultItem, 'stance', $variables, $expressions, $options);
                 $params = array(
                     'selected' => $selected
