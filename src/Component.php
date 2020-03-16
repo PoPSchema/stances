@@ -30,9 +30,9 @@ class Component extends AbstractComponent
      *
      * @return void
      */
-    public static function prematureBoot()
+    public static function beforeBoot()
     {
-        parent::prematureBoot();
+        parent::beforeBoot();
 
         // Initialize classes
         ContainerBuilderUtils::registerTypeResolversFromNamespace(__NAMESPACE__.'\\TypeResolvers');
