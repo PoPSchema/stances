@@ -6,3 +6,7 @@ services:
     PoP\Stances\TypeResolverPickers\:
         resource: '../src/TypeResolverPickers/*'
         public: true
+
+    PoP\Stances\TypeResolvers\:
+        resource: '../src/TypeResolvers/*'
+        public: true
