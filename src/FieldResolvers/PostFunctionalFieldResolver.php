@@ -2,7 +2,7 @@
 namespace PoP\Stances\FieldResolvers;
 
 use PoP\Engine\Route\RouteUtils;
-use PoP\ComponentModel\GeneralUtils;
+use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Posts\Facades\PostTypeAPIFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
