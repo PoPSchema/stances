@@ -10,6 +10,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Content\FieldInterfaces\ContentEntityFieldInterfaceResolver;
 use PoP\ComponentModel\FieldResolvers\AbstractFunctionalFieldResolver;
+use PoP\ComponentModel\State\ApplicationState;
 
 class PostFunctionalFieldResolver extends AbstractFunctionalFieldResolver
 {
@@ -95,7 +96,7 @@ class PostFunctionalFieldResolver extends AbstractFunctionalFieldResolver
                 ], RouteUtils::getRouteURL($route));
 
             case 'loggedInUserStances':
-                $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+                $vars = ApplicationState::getVars();
                 if (!$vars['global-userstate']['is-user-logged-in']) {
                     return array();
                 }
