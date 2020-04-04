@@ -11,6 +11,7 @@ use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Content\FieldInterfaces\ContentEntityFieldInterfaceResolver;
 use PoP\ComponentModel\FieldResolvers\AbstractFunctionalFieldResolver;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\Misc\RequestUtils;
 
 class PostFunctionalFieldResolver extends AbstractFunctionalFieldResolver
 {
@@ -126,7 +127,7 @@ class PostFunctionalFieldResolver extends AbstractFunctionalFieldResolver
                     'postStancesAgainstURL' => POP_USERSTANCE_ROUTE_STANCES_AGAINST,
                 );
                 $url = $postTypeAPI->getPermalink($post);
-                return \PoP\ComponentModel\Utils::addRoute($url, $routes[$fieldName]);
+                return RequestUtils::addRoute($url, $routes[$fieldName]);
 
             // Lazy Loading fields
             case 'createStanceButtonLazy':
