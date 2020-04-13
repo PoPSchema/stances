@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace PoP\Stances\TypeDataLoaders;
 
 use PoP\Posts\TypeDataLoaders\PostTypeDataLoader;

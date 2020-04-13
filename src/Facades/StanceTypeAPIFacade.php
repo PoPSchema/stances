@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace PoP\Stances\Facades;
 
 use PoP\Stances\TypeAPIs\StanceTypeAPIInterface;

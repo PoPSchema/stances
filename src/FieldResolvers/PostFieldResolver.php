@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace PoP\Stances\FieldResolvers;
 
 use PoP\Posts\Facades\PostTypeAPIFacade;
