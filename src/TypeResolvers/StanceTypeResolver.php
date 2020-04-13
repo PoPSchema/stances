@@ -8,7 +8,7 @@ use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
 
 class StanceTypeResolver extends AbstractTypeResolver
 {
-	public const NAME = 'Stance';
+    public const NAME = 'Stance';
 
     public function getTypeName(): string
     {
@@ -32,4 +32,3 @@ class StanceTypeResolver extends AbstractTypeResolver
         return StanceTypeDataLoader::class;
     }
 }
-
