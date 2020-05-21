@@ -20,12 +20,13 @@ Via Composer
 composer require getpop/stances
 ```
 
-<!--
 ## Usage
 
+Initialize the component:
+
 ``` php
+\PoP\Stances\Component::initialize();
 ```
--->
 
 ## Standards
 
