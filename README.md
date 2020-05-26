@@ -25,7 +25,9 @@ composer require getpop/stances
 Initialize the component:
 
 ``` php
-\PoP\Stances\Component::initialize();
+\PoP\Root\ComponentLoader::initializeComponents([
+    \PoP\Stances\Component::class,
+]);
 ```
 
 ## Standards
