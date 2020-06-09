@@ -15,6 +15,7 @@ use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Content\TypeResolvers\ContentEntityUnionTypeResolver;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\Content\FieldInterfaces\ContentEntityFieldInterfaceResolver;
+use PoP\Stances\ComponentConfiguration;
 
 class PostFieldResolver extends AbstractDBDataFieldResolver
 {
@@ -136,7 +137,7 @@ class PostFieldResolver extends AbstractDBDataFieldResolver
 
             case 'stances':
                 $query = array(
-                    'limit' => -1,/*'posts-per-page' => -1,*/ // Bring all the results
+                    'limit' => ComponentConfiguration::getStanceListDefaultLimit(),
                     'orderby' => NameResolverFacade::getInstance()->getName('popcms:dbcolumn:orderby:posts:date'),
                     'order' => 'ASC',
                 );
