@@ -44,6 +44,7 @@ class Component extends AbstractComponent
     protected static function doInitialize(array $configuration = [], bool $skipSchema = false): void
     {
         parent::doInitialize($configuration, $skipSchema);
+        ComponentConfiguration::setConfiguration($configuration);
         self::maybeInitYAMLSchemaServices(dirname(__DIR__), $skipSchema);
     }
 
