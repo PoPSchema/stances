@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace PoP\Stances\TypeResolverPickers\Optional;
 
-use PoP\Content\TypeResolvers\ContentEntityUnionTypeResolver;
+use PoP\Content\TypeResolvers\CustomPostUnionTypeResolver;
 use PoP\Stances\TypeResolverPickers\AbstractStanceTypeResolverPicker;
 
-class StanceContentEntityTypeResolverPicker extends AbstractStanceTypeResolverPicker
+class StanceCustomPostTypeResolverPicker extends AbstractStanceTypeResolverPicker
 {
     public static function getClassesToAttachTo(): array
     {
         return [
-            ContentEntityUnionTypeResolver::class,
+            CustomPostUnionTypeResolver::class,
         ];
     }
 }

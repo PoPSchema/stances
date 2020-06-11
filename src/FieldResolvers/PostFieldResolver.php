@@ -12,9 +12,9 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoP\ComponentModel\TypeResolvers\UnionTypeHelpers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\Content\TypeResolvers\ContentEntityUnionTypeResolver;
+use PoP\Content\TypeResolvers\CustomPostUnionTypeResolver;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
-use PoP\Content\FieldInterfaces\ContentEntityFieldInterfaceResolver;
+use PoP\Content\FieldInterfaces\CustomPostFieldInterfaceResolver;
 use PoP\Stances\ComponentConfiguration;
 
 class PostFieldResolver extends AbstractDBDataFieldResolver
@@ -22,7 +22,7 @@ class PostFieldResolver extends AbstractDBDataFieldResolver
     public static function getClassesToAttachTo(): array
     {
         return [
-            ContentEntityFieldInterfaceResolver::class,
+            CustomPostFieldInterfaceResolver::class,
         ];
     }
 
@@ -199,7 +199,7 @@ class PostFieldResolver extends AbstractDBDataFieldResolver
     {
         switch ($fieldName) {
             case 'stancetarget':
-                return UnionTypeHelpers::getUnionOrTargetTypeResolverClass(ContentEntityUnionTypeResolver::class);
+                return UnionTypeHelpers::getUnionOrTargetTypeResolverClass(CustomPostUnionTypeResolver::class);
 
             case 'stances':
                 return StanceTypeResolver::class;
