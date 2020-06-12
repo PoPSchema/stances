@@ -11,6 +11,6 @@ class Environment
 
     public static function addStanceTypeToCustomPostUnionTypes(): bool
     {
-        return isset($_ENV['ADD_STANCE_TYPE_TO_CUSTOM_POST_UNION_TYPES']) ? strtolower($_ENV['ADD_STANCE_TYPE_TO_CUSTOM_POST_UNION_TYPES']) == "true" : false;
+        return isset($_ENV['ADD_STANCE_TYPE_TO_CUSTOMPOST_UNION_TYPES']) ? strtolower($_ENV['ADD_STANCE_TYPE_TO_CUSTOMPOST_UNION_TYPES']) == "true" : false;
     }
 }
