@@ -16,7 +16,7 @@ use PoP\ComponentModel\FieldResolvers\AbstractFunctionalFieldResolver;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\Misc\RequestUtils;
 
-class PostFunctionalFieldResolver extends AbstractFunctionalFieldResolver
+class CustomPostFunctionalFieldResolver extends AbstractFunctionalFieldResolver
 {
     public static function getClassesToAttachTo(): array
     {
