@@ -148,10 +148,10 @@ class PostFieldResolver extends AbstractDBDataFieldResolver
                 return $value;
 
             case 'stancetarget':
-                return \PoP\PostMeta\Utils::getPostMeta($typeResolver->getID($stance), GD_METAKEY_POST_STANCETARGET, true);
+                return \PoP\CustomPostMeta\Utils::getCustomPostMeta($typeResolver->getID($stance), GD_METAKEY_POST_STANCETARGET, true);
 
             case 'hasStanceTarget':
-                // Cannot use !is_null because getPostMeta returns "" when there's no entry, instead of null
+                // Cannot use !is_null because getCustomPostMeta returns "" when there's no entry, instead of null
                 return $typeResolver->resolveValue($resultItem, 'stancetarget', $variables, $expressions, $options);
 
             case 'stances':
