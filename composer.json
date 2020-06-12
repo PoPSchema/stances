@@ -19,7 +19,7 @@
     "prefer-stable": true,
     "require": {
         "php" : "~7.1",
-        "getpop/custom-posts": "dev-master"
+        "getpop/customposts": "dev-master"
     },
     "require-dev": {
         "getpop/posts": "dev-master",
