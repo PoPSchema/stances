@@ -10,9 +10,7 @@ use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\Stances\TypeResolvers\StanceTypeResolver;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
-use PoP\ComponentModel\TypeResolvers\UnionTypeHelpers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\CustomPosts\FieldInterfaces\CustomPostFieldInterfaceResolver;
 use PoP\Stances\ComponentConfiguration;
@@ -29,14 +27,6 @@ class PostFieldResolver extends AbstractDBDataFieldResolver
     public static function getFieldNamesToResolve(): array
     {
         return [
-            'categories',
-            'catSlugs',
-            'stance',
-            'title',
-            'excerpt',
-            'content',
-            'stancetarget',
-            'hasStanceTarget',
             'stances',
             'hasStances',
             'stanceProCount',
@@ -48,14 +38,6 @@ class PostFieldResolver extends AbstractDBDataFieldResolver
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $types = [
-            'categories' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
-            'catSlugs' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
-            'stance' => SchemaDefinition::TYPE_INT,
-            'title' => SchemaDefinition::TYPE_STRING,
-            'excerpt' => SchemaDefinition::TYPE_STRING,
-            'content' => SchemaDefinition::TYPE_STRING,
-            'stancetarget' => SchemaDefinition::TYPE_ID,
-            'hasStanceTarget' => SchemaDefinition::TYPE_BOOL,
             'stances' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
             'hasStances' => SchemaDefinition::TYPE_BOOL,
             'stanceProCount' => SchemaDefinition::TYPE_INT,
@@ -68,10 +50,6 @@ class PostFieldResolver extends AbstractDBDataFieldResolver
     public function isSchemaFieldResponseNonNullable(TypeResolverInterface $typeResolver, string $fieldName): bool
     {
         $nonNullableFieldNames = [
-            'categories',
-            'catSlugs',
-            'content',
-            'hasStanceTarget',
             'stances',
             'hasStances',
             'stanceProCount',
@@ -88,14 +66,6 @@ class PostFieldResolver extends AbstractDBDataFieldResolver
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'categories' => $translationAPI->__('', ''),
-            'catSlugs' => $translationAPI->__('', ''),
-            'stance' => $translationAPI->__('', ''),
-            'title' => $translationAPI->__('', ''),
-            'excerpt' => $translationAPI->__('', ''),
-            'content' => $translationAPI->__('', ''),
-            'stancetarget' => $translationAPI->__('', ''),
-            'hasStanceTarget' => $translationAPI->__('', ''),
             'stances' => $translationAPI->__('', ''),
             'hasStances' => $translationAPI->__('', ''),
             'stanceProCount' => $translationAPI->__('', ''),
@@ -108,59 +78,15 @@ class PostFieldResolver extends AbstractDBDataFieldResolver
     public function resolveValue(TypeResolverInterface $typeResolver, $resultItem, string $fieldName, array $fieldArgs = [], ?array $variables = null, ?array $expressions = null, array $options = [])
     {
         $postTypeAPI = PostTypeAPIFacade::getInstance();
-        $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
-        $stance = $resultItem;
+        $customPost = $resultItem;
         switch ($fieldName) {
-            case 'categories':
-                return $taxonomyapi->getPostTaxonomyTerms(
-                    $typeResolver->getID($stance),
-                    POP_USERSTANCE_TAXONOMY_STANCE,
-                    [
-                        'return-type' => POP_RETURNTYPE_IDS,
-                    ]
-                );
-
-            case 'catSlugs':
-                return $taxonomyapi->getPostTaxonomyTerms(
-                    $typeResolver->getID($stance),
-                    POP_USERSTANCE_TAXONOMY_STANCE,
-                    [
-                        'return-type' => POP_RETURNTYPE_SLUGS,
-                    ]
-                );
-
-            case 'stance':
-                // The stance is the category
-                return $typeResolver->resolveValue($resultItem, 'mainCategory', $variables, $expressions, $options);
-
-         // The Stance has no title, so return the excerpt instead.
-         // Needed for when adding a comment on the Stance, where it will say: Add comment for...
-            case 'title':
-            case 'excerpt':
-            case 'content':
-                // Add the quotes around the content for the Stance
-                $value = $postTypeAPI->getBasicPostContent($stance);
-                if ($fieldName == 'title') {
-                    return limitString($value, 100);
-                } elseif ($fieldName == 'excerpt') {
-                    return limitString($value, 300);
-                }
-                return $value;
-
-            case 'stancetarget':
-                return \PoP\CustomPostMeta\Utils::getCustomPostMeta($typeResolver->getID($stance), GD_METAKEY_POST_STANCETARGET, true);
-
-            case 'hasStanceTarget':
-                // Cannot use !is_null because getCustomPostMeta returns "" when there's no entry, instead of null
-                return $typeResolver->resolveValue($resultItem, 'stancetarget', $variables, $expressions, $options);
-
             case 'stances':
                 $query = array(
                     'limit' => ComponentConfiguration::getStanceListDefaultLimit(),
                     'orderby' => NameResolverFacade::getInstance()->getName('popcms:dbcolumn:orderby:posts:date'),
                     'order' => 'ASC',
                 );
-                \UserStance_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsStancesaboutpost($query, $typeResolver->getID($stance));
+                \UserStance_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsStancesaboutpost($query, $typeResolver->getID($customPost));
 
                 return $postTypeAPI->getPosts($query, ['return-type' => POP_RETURNTYPE_IDS]);
 
@@ -178,7 +104,7 @@ class PostFieldResolver extends AbstractDBDataFieldResolver
                 );
 
                 $query = array();
-                \UserStance_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsStancesaboutpost($query, $typeResolver->getID($stance));
+                \UserStance_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsStancesaboutpost($query, $typeResolver->getID($customPost));
 
                 // Override the category
                 $query['tax-query'][] = [
@@ -198,9 +124,6 @@ class PostFieldResolver extends AbstractDBDataFieldResolver
     public function resolveFieldTypeResolverClass(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?string
     {
         switch ($fieldName) {
-            case 'stancetarget':
-                return UnionTypeHelpers::getUnionOrTargetTypeResolverClass(CustomPostUnionTypeResolver::class);
-
             case 'stances':
                 return StanceTypeResolver::class;
         }
