@@ -29,7 +29,7 @@ class PostFieldResolver extends AbstractDBDataFieldResolver
     public static function getFieldNamesToResolve(): array
     {
         return [
-            'cats',
+            'categories',
             'catSlugs',
             'stance',
             'title',
@@ -48,7 +48,7 @@ class PostFieldResolver extends AbstractDBDataFieldResolver
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $types = [
-            'cats' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
+            'categories' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
             'catSlugs' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
             'stance' => SchemaDefinition::TYPE_INT,
             'title' => SchemaDefinition::TYPE_STRING,
@@ -68,7 +68,7 @@ class PostFieldResolver extends AbstractDBDataFieldResolver
     public function isSchemaFieldResponseNonNullable(TypeResolverInterface $typeResolver, string $fieldName): bool
     {
         $nonNullableFieldNames = [
-            'cats',
+            'categories',
             'catSlugs',
             'content',
             'hasStanceTarget',
@@ -88,7 +88,7 @@ class PostFieldResolver extends AbstractDBDataFieldResolver
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'cats' => $translationAPI->__('', ''),
+            'categories' => $translationAPI->__('', ''),
             'catSlugs' => $translationAPI->__('', ''),
             'stance' => $translationAPI->__('', ''),
             'title' => $translationAPI->__('', ''),
@@ -111,7 +111,7 @@ class PostFieldResolver extends AbstractDBDataFieldResolver
         $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
         $stance = $resultItem;
         switch ($fieldName) {
-            case 'cats':
+            case 'categories':
                 return $taxonomyapi->getPostTaxonomyTerms(
                     $typeResolver->getID($stance),
                     POP_USERSTANCE_TAXONOMY_STANCE,
@@ -131,7 +131,7 @@ class PostFieldResolver extends AbstractDBDataFieldResolver
 
             case 'stance':
                 // The stance is the category
-                return $typeResolver->resolveValue($resultItem, 'cat', $variables, $expressions, $options);
+                return $typeResolver->resolveValue($resultItem, 'mainCategory', $variables, $expressions, $options);
 
          // The Stance has no title, so return the excerpt instead.
          // Needed for when adding a comment on the Stance, where it will say: Add comment for...
