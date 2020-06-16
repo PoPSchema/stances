@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Stances\FieldResolvers;
 
-use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\Stances\TypeResolvers\StanceTypeResolver;
@@ -77,7 +77,7 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
 
     public function resolveValue(TypeResolverInterface $typeResolver, $resultItem, string $fieldName, array $fieldArgs = [], ?array $variables = null, ?array $expressions = null, array $options = [])
     {
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
+        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $customPost = $resultItem;
         switch ($fieldName) {
             case 'stances':
@@ -88,7 +88,7 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
                 );
                 \UserStance_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsStancesaboutpost($query, $typeResolver->getID($customPost));
 
-                return $postTypeAPI->getPosts($query, ['return-type' => POP_RETURNTYPE_IDS]);
+                return $customPostTypeAPI->getCustomPosts($query, ['return-type' => POP_RETURNTYPE_IDS]);
 
             case 'hasStances':
                 $referencedby = $typeResolver->resolveValue($resultItem, 'stances', $variables, $expressions, $options);
@@ -115,7 +115,7 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
                 // // All results
                 // $query['limit'] = 0;
 
-                return $postTypeAPI->getPostCount($query);
+                return $customPostTypeAPI->getCustomPostCount($query);
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);

@@ -6,7 +6,7 @@ namespace PoP\Stances\FieldResolvers;
 
 use PoP\Engine\Route\RouteUtils;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\Translation\Facades\TranslationAPIFacade;
@@ -82,7 +82,7 @@ class CustomPostFunctionalFieldResolver extends AbstractFunctionalFieldResolver
     public function resolveValue(TypeResolverInterface $typeResolver, $resultItem, string $fieldName, array $fieldArgs = [], ?array $variables = null, ?array $expressions = null, array $options = [])
     {
         $post = $resultItem;
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
+        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $cmseditpostsapi = \PoP\EditPosts\FunctionAPIFactory::getInstance();
         switch ($fieldName) {
             case 'addStanceURL':
@@ -109,7 +109,7 @@ class CustomPostFunctionalFieldResolver extends AbstractFunctionalFieldResolver
                 );
                 \UserStance_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsStancesaboutpost($query, $typeResolver->getID($post));
 
-                return $postTypeAPI->getPosts($query, ['return-type' => POP_RETURNTYPE_IDS]);
+                return $customPostTypeAPI->getCustomPosts($query, ['return-type' => POP_RETURNTYPE_IDS]);
 
             case 'hasLoggedInUserStances':
                 $referencedby = $typeResolver->resolveValue($resultItem, 'loggedInUserStances', $variables, $expressions, $options);
@@ -129,7 +129,7 @@ class CustomPostFunctionalFieldResolver extends AbstractFunctionalFieldResolver
                     'postStancesNeutralURL' => POP_USERSTANCE_ROUTE_STANCES_NEUTRAL,
                     'postStancesAgainstURL' => POP_USERSTANCE_ROUTE_STANCES_AGAINST,
                 );
-                $url = $postTypeAPI->getPermalink($post);
+                $url = $customPostTypeAPI->getPermalink($post);
                 return RequestUtils::addRoute($url, $routes[$fieldName]);
 
             // Lazy Loading fields
