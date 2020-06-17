@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Stances\FieldResolvers;
 
-use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\Stances\TypeResolvers\StanceTypeResolver;
@@ -84,7 +84,7 @@ class StanceFieldResolver extends AbstractDBDataFieldResolver
 
     public function resolveValue(TypeResolverInterface $typeResolver, $resultItem, string $fieldName, array $fieldArgs = [], ?array $variables = null, ?array $expressions = null, array $options = [])
     {
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
+        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
         $stance = $resultItem;
         switch ($fieldName) {
@@ -116,7 +116,7 @@ class StanceFieldResolver extends AbstractDBDataFieldResolver
             case 'excerpt':
             case 'content':
                 // Add the quotes around the content for the Stance
-                $value = $postTypeAPI->getBasicPostContent($stance);
+                $value = $customPostTypeAPI->getPlainTextContent($stance);
                 if ($fieldName == 'title') {
                     return limitString($value, 100);
                 } elseif ($fieldName == 'excerpt') {

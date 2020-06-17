@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\Stances\TypeDataLoaders;
 
-use PoP\Posts\TypeDataLoaders\PostTypeDataLoader;
+use PoP\CustomPosts\TypeDataLoaders\CustomPostTypeDataLoader;
 
-class StanceTypeDataLoader extends PostTypeDataLoader
+class StanceTypeDataLoader extends CustomPostTypeDataLoader
 {
     public function getDataFromIdsQuery(array $ids): array
     {
