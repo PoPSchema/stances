@@ -11,7 +11,7 @@ class StanceTypeDataLoader extends AbstractCustomPostTypeDataLoader
     public function getDataFromIdsQuery(array $ids): array
     {
         $query = parent::getDataFromIdsQuery($ids);
-        $query['post-types'] = array(POP_USERSTANCE_POSTTYPE_USERSTANCE);
+        $query['custom-post-types'] = array(POP_USERSTANCE_POSTTYPE_USERSTANCE);
         return $query;
     }
 
@@ -22,7 +22,7 @@ class StanceTypeDataLoader extends AbstractCustomPostTypeDataLoader
     {
         $query = parent::getQuery($query_args);
 
-        $query['post-types'] = array(POP_USERSTANCE_POSTTYPE_USERSTANCE);
+        $query['custom-post-types'] = array(POP_USERSTANCE_POSTTYPE_USERSTANCE);
 
         return $query;
     }
