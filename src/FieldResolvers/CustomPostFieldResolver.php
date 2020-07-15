@@ -83,7 +83,7 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
             case 'stances':
                 $query = array(
                     'limit' => ComponentConfiguration::getStanceListDefaultLimit(),
-                    'orderby' => NameResolverFacade::getInstance()->getName('popcms:dbcolumn:orderby:posts:date'),
+                    'orderby' => NameResolverFacade::getInstance()->getName('popcms:dbcolumn:orderby:customposts:date'),
                     'order' => 'ASC',
                 );
                 \UserStance_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsStancesaboutpost($query, $typeResolver->getID($customPost));
