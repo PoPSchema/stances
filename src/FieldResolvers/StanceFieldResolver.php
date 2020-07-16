@@ -89,7 +89,7 @@ class StanceFieldResolver extends AbstractDBDataFieldResolver
         $stance = $resultItem;
         switch ($fieldName) {
             case 'categories':
-                return $taxonomyapi->getPostTaxonomyTerms(
+                return $taxonomyapi->getCustomPostTaxonomyTerms(
                     $typeResolver->getID($stance),
                     POP_USERSTANCE_TAXONOMY_STANCE,
                     [
@@ -98,7 +98,7 @@ class StanceFieldResolver extends AbstractDBDataFieldResolver
                 );
 
             case 'catSlugs':
-                return $taxonomyapi->getPostTaxonomyTerms(
+                return $taxonomyapi->getCustomPostTaxonomyTerms(
                     $typeResolver->getID($stance),
                     POP_USERSTANCE_TAXONOMY_STANCE,
                     [
