@@ -93,7 +93,7 @@ class StanceFieldResolver extends AbstractDBDataFieldResolver
                     $typeResolver->getID($stance),
                     POP_USERSTANCE_TAXONOMY_STANCE,
                     [
-                        'return-type' => POP_RETURNTYPE_IDS,
+                        'return-type' => \POP_RETURNTYPE_IDS,
                     ]
                 );
 
