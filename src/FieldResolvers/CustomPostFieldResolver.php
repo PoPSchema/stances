@@ -12,7 +12,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
-use PoP\CustomPosts\FieldInterfaceResolvers\CustomPostFieldInterfaceResolver;
+use PoP\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
 use PoP\Stances\ComponentConfiguration;
 
 class CustomPostFieldResolver extends AbstractDBDataFieldResolver
@@ -20,7 +20,7 @@ class CustomPostFieldResolver extends AbstractDBDataFieldResolver
     public static function getClassesToAttachTo(): array
     {
         return [
-            CustomPostFieldInterfaceResolver::class,
+            IsCustomPostFieldInterfaceResolver::class,
         ];
     }
 
