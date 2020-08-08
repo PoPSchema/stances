@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoP\Stances\TypeResolverPickers\Optional;
+namespace PoPSchema\Stances\TypeResolverPickers\Optional;
 
-use PoP\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
-use PoP\Stances\TypeResolverPickers\AbstractStanceTypeResolverPicker;
+use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
+use PoPSchema\Stances\TypeResolverPickers\AbstractStanceTypeResolverPicker;
 
 class StanceCustomPostTypeResolverPicker extends AbstractStanceTypeResolverPicker
 {

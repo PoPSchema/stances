@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace PoP\Stances\FieldResolvers;
+namespace PoPSchema\Stances\FieldResolvers;
 
-use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
-use PoP\Stances\TypeResolvers\StanceTypeResolver;
+use PoPSchema\Stances\TypeResolvers\StanceTypeResolver;
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
+use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
+use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 
 class StanceFieldResolver extends AbstractDBDataFieldResolver
@@ -85,7 +85,7 @@ class StanceFieldResolver extends AbstractDBDataFieldResolver
     public function resolveValue(TypeResolverInterface $typeResolver, $resultItem, string $fieldName, array $fieldArgs = [], ?array $variables = null, ?array $expressions = null, array $options = [])
     {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
+        $taxonomyapi = \PoPSchema\Taxonomies\FunctionAPIFactory::getInstance();
         $stance = $resultItem;
         switch ($fieldName) {
             case 'categories':
@@ -125,7 +125,7 @@ class StanceFieldResolver extends AbstractDBDataFieldResolver
                 return $value;
 
             case 'stancetarget':
-                return \PoP\CustomPostMeta\Utils::getCustomPostMeta($typeResolver->getID($stance), GD_METAKEY_POST_STANCETARGET, true);
+                return \PoPSchema\CustomPostMeta\Utils::getCustomPostMeta($typeResolver->getID($stance), GD_METAKEY_POST_STANCETARGET, true);
 
             case 'hasStanceTarget':
                 // Cannot use !is_null because getCustomPostMeta returns "" when there's no entry, instead of null

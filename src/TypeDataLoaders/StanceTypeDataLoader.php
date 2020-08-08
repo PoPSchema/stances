@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoP\Stances\TypeDataLoaders;
+namespace PoPSchema\Stances\TypeDataLoaders;
 
-use PoP\CustomPosts\TypeDataLoaders\AbstractCustomPostTypeDataLoader;
+use PoPSchema\CustomPosts\TypeDataLoaders\AbstractCustomPostTypeDataLoader;
 
 class StanceTypeDataLoader extends AbstractCustomPostTypeDataLoader
 {

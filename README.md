@@ -17,7 +17,7 @@ Adds support for stances
 Via Composer
 
 ``` bash
-composer require getpop/stances
+composer require pop-schema/stances
 ```
 
 ## Usage
@@ -26,7 +26,7 @@ Initialize the component:
 
 ``` php
 \PoP\Root\ComponentLoader::initializeComponents([
-    \PoP\Stances\Component::class,
+    \PoPSchema\Stances\Component::class,
 ]);
 ```
 
@@ -75,17 +75,17 @@ If you discover any security related issues, please email leo@getpop.org instead
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/getpop/stances.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/pop-schema/stances.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/getpop/stances/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/getpop/stances.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/getpop/stances.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/getpop/stances.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/pop-schema/stances/master.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/pop-schema/stances.svg?style=flat-square
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/pop-schema/stances.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/pop-schema/stances.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/getpop/stances
-[link-travis]: https://travis-ci.org/getpop/stances
-[link-scrutinizer]: https://scrutinizer-ci.com/g/getpop/stances/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/getpop/stances
-[link-downloads]: https://packagist.org/packages/getpop/stances
+[link-packagist]: https://packagist.org/packages/pop-schema/stances
+[link-travis]: https://travis-ci.org/pop-schema/stances
+[link-scrutinizer]: https://scrutinizer-ci.com/g/pop-schema/stances/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/pop-schema/stances
+[link-downloads]: https://packagist.org/packages/pop-schema/stances
 [link-author]: https://github.com/leoloso
 [link-contributors]: ../../contributors

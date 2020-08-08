@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace PoP\Stances;
+namespace PoPSchema\Stances;
 
-use PoP\Stances\Environment;
+use PoPSchema\Stances\Environment;
 use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Component\YAMLServicesTrait;
 use PoP\ComponentModel\Container\ContainerBuilderUtils;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
-use PoP\Stances\TypeResolverPickers\Optional\StanceCustomPostTypeResolverPicker;
+use PoPSchema\Stances\TypeResolverPickers\Optional\StanceCustomPostTypeResolverPicker;
 
 /**
  * Initialize component
@@ -22,7 +22,7 @@ class Component extends AbstractComponent
     public static function getDependedComponentClasses(): array
     {
         return [
-            \PoP\CustomPosts\Component::class,
+            \PoPSchema\CustomPosts\Component::class,
         ];
     }
 

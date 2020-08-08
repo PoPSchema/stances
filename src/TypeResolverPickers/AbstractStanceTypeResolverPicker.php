@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoP\Stances\TypeResolverPickers;
+namespace PoPSchema\Stances\TypeResolverPickers;
 
-use PoP\Stances\Facades\StanceTypeAPIFacade;
-use PoP\Stances\TypeResolvers\StanceTypeResolver;
+use PoPSchema\Stances\Facades\StanceTypeAPIFacade;
+use PoPSchema\Stances\TypeResolvers\StanceTypeResolver;
 use PoP\ComponentModel\TypeResolverPickers\AbstractTypeResolverPicker;
 
 class AbstractStanceTypeResolverPicker extends AbstractTypeResolverPicker

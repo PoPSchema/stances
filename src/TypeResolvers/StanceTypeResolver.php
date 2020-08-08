@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoP\Stances\TypeResolvers;
+namespace PoPSchema\Stances\TypeResolvers;
 
-use PoP\Stances\Facades\StanceTypeAPIFacade;
+use PoPSchema\Stances\Facades\StanceTypeAPIFacade;
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\Stances\TypeDataLoaders\StanceTypeDataLoader;
+use PoPSchema\Stances\TypeDataLoaders\StanceTypeDataLoader;
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
 
 class StanceTypeResolver extends AbstractTypeResolver

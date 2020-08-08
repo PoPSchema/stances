@@ -1,5 +1,5 @@
 {
-    "name": "getpop/stances",
+    "name": "pop-schema/stances",
     "type": "library",
     "description": "Adds support for stances",
     "keywords": [
@@ -19,7 +19,7 @@
     "prefer-stable": true,
     "require": {
         "php": "~7.2",
-        "getpop/customposts": "dev-master"
+        "pop-schema/customposts": "dev-master"
     },
     "require-dev": {
         "phpstan/phpstan": "^0.12",
@@ -28,12 +28,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PoP\\Stances\\": "src"
+            "PoPSchema\\Stances\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PoP\\Stances\\": "tests"
+            "PoPSchema\\Stances\\": "tests"
         }
     },
     "scripts": {
