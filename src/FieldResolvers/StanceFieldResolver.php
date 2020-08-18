@@ -13,6 +13,7 @@ use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
+use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 class StanceFieldResolver extends AbstractDBDataFieldResolver
 {
@@ -93,7 +94,7 @@ class StanceFieldResolver extends AbstractDBDataFieldResolver
                     $typeResolver->getID($stance),
                     POP_USERSTANCE_TAXONOMY_STANCE,
                     [
-                        'return-type' => \POP_RETURNTYPE_IDS,
+                        'return-type' => ReturnTypes::IDS,
                     ]
                 );
 
@@ -102,7 +103,7 @@ class StanceFieldResolver extends AbstractDBDataFieldResolver
                     $typeResolver->getID($stance),
                     POP_USERSTANCE_TAXONOMY_STANCE,
                     [
-                        'return-type' => POP_RETURNTYPE_SLUGS,
+                        'return-type' => ReturnTypes::SLUGS,
                     ]
                 );
 
