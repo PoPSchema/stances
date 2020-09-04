@@ -11,6 +11,10 @@ class StanceTypeAPIFacade
 {
     public static function getInstance(): StanceTypeAPIInterface
     {
-        return ContainerBuilderFactory::getInstance()->get('stance_type_api');
+        /**
+         * @var StanceTypeAPIInterface
+         */
+        $service = ContainerBuilderFactory::getInstance()->get('stance_type_api');
+        return $service;
     }
 }
