@@ -14,7 +14,7 @@ class StanceTypeAPIFacade
         /**
          * @var StanceTypeAPIInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get('stance_type_api');
+        $service = ContainerBuilderFactory::getInstance()->get(StanceTypeAPIInterface::class);
         return $service;
     }
 }
